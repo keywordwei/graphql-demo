@@ -1,0 +1,21 @@
+fragment respository on Repository {
+  id
+  name
+  stargazerCount
+  description
+  createdAt
+  url
+  sshUrl
+  isPrivate
+  isFork
+  languages(last: $last) {
+    nodes {
+      id
+      color
+      name
+    }
+  }
+  defaultBranchRef {
+    name
+  }
+}

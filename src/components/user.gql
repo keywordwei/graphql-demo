@@ -1,0 +1,12 @@
+#import "./respository.gql"
+
+query ($login: String!, $last: Int!) {
+  user (login: $login) {
+    repositories(last: $last) {
+      nodes {
+        ...respository
+      }
+      totalCount
+    }
+  }
+}
