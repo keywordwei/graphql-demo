@@ -1,0 +1,11 @@
+#import "../fragment/repository.gql"
+
+query user($login: String!, $last: Int!) {
+  user(login: $login) {
+    repositories(last: $last) {
+      nodes {
+        ...repository
+      }
+    }
+  }
+}

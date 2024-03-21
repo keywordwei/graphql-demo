@@ -1,0 +1,11 @@
+fragment repository on Repository {
+  isFork
+  languages(last: $last) {
+    nodes {
+      name
+    }
+  }
+  defaultBranchRef {
+    name
+  }
+}

@@ -1,0 +1,11 @@
+fragment repository on Repository {
+  id
+  name
+  description
+  languages(last: $last) {
+    nodes {
+      id
+      color
+    }
+  }
+}

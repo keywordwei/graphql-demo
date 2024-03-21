@@ -1,4 +1,3 @@
-<script>
 import { defineComponent, h } from 'vue'
 
 export default defineComponent({
@@ -10,18 +9,16 @@ export default defineComponent({
   },
   data() {
     return {
+      /** 列数组映射的控制数组 */
       columns_option: undefined
     }
   },
   methods: {
-    initColumns() {
-      if (!this.$slots.default) {
-        throw new Error('[x-table-column-filter] need a default slot')
-      }
-      this.columns_option = this.$slots.default().map((it) => ({
-        filterable: it.type?.name == 'ElTableColumn',
-        visible: true,
-        ...it.props
+    /** 自动处理所有列插槽内容 */
+    initColumns(columns) {
+      this.columns_option = columns.map((it) => ({
+        ...it.props,
+        visible: true
       }))
     },
     /** 获取列数组映射的控制数组 */
@@ -34,9 +31,12 @@ export default defineComponent({
     if (!this.$slots.default) {
       throw new Error('[x-table-column-filter] need a default slot')
     }
-    let slots = this.$slots.default()
-    this.initColumns()
+    this.initColumns(this.$slots.default())
     return h(() => {
+      if (!this.$slots.default) {
+        throw new Error('[x-table-column-filter] need a default slot')
+      }
+      let slots = this.$slots.default()
       if (!this.effect) {
         return slots
       }
@@ -49,4 +49,3 @@ export default defineComponent({
     })
   }
 })
-</script>
